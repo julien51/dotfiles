@@ -1,0 +1,21 @@
+# This is Git's per-user configuration file.
+[user]
+# Please adapt and uncomment the following lines:
+	name = Julien Genestoux
+	email = 17735+julien51@users.noreply.github.com
+	signingkey = C7ABC13E5238B19B
+[alias]
+	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+[core]
+	pager = less -F -X
+	editor = code --wait
+[commit]
+	gpgsign = true
+[gpg]
+	program = gpg
+[init]
+	defaultBranch = main
+[branch]
+	sort = committerdate
+[log]
+	date = local

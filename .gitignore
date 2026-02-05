@@ -1,0 +1,11 @@
+# ABOUTME: Git ignore file for dotfiles repo.
+# ABOUTME: Excludes machine-specific and sensitive files.
+
+# Machine-specific Claude settings
+.claude/settings.local.json
+
+# macOS
+.DS_Store
+
+# Backup files created by install script
+*.backup
