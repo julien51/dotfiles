@@ -1,11 +1,6 @@
 # ABOUTME: Bash configuration file.
 # ABOUTME: Cross-platform compatible (macOS and Linux).
 
-#### FIG ENV VARIABLES ####
-[ -s ~/.fig/shell/pre.sh ] && source ~/.fig/shell/pre.sh
-[ -s ~/.fig/fig.sh ] && source ~/.fig/fig.sh
-#### END FIG ENV VARIABLES ####
-
 # Docker Desktop (macOS only)
 [ -f "$HOME/.docker/init-bash.sh" ] && source "$HOME/.docker/init-bash.sh"
 
