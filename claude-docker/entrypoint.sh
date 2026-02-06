@@ -1,4 +1,4 @@
-#\!/bin/sh
+#!/bin/sh
 set -e
 
 # Initialize /root on first boot of this session volume.
