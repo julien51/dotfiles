@@ -20,12 +20,6 @@ if [ \! -f /root/.initialized ]; then
       cp /shared-config/.claude.json /root/.claude.json
     fi
 
-    # claude-code config
-    if [ -f /shared-config/.config/claude-code/config.json ]; then
-      mkdir -p /root/.config/claude-code
-      cp /shared-config/.config/claude-code/config.json /root/.config/claude-code/config.json
-    fi
-
     # .claude credentials
     if [ -f /shared-config/.claude/.credentials.json ]; then
       mkdir -p /root/.claude
@@ -60,12 +54,6 @@ if [ \! -f /root/.initialized ]; then
   fi
 
   # 2. Fall back to /root-template/ for anything still missing
-  if [ \! -f /root/.config/claude-code/config.json ]; then
-    mkdir -p /root/.config/claude-code
-    cp /root-template/.config/claude-code/config.json /root/.config/claude-code/config.json
-    echo "[INIT] Used template for claude-code config." >&2
-  fi
-
   if [ \! -f /root/.gitconfig ]; then
     cp /root-template/.gitconfig /root/.gitconfig
     echo "[INIT] Used template for .gitconfig." >&2

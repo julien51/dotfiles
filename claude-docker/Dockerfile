@@ -15,10 +15,6 @@ RUN apt-get update && apt-get install -y \
 # Install Claude Code globally
 RUN npm install -g @anthropic-ai/claude-code
 
-# Create template directory with pre-configured files
-RUN mkdir -p /root-template/.config/claude-code && \
-    echo '{"dangerouslySkipPermissions": true}' > /root-template/.config/claude-code/config.json
-
 # Configure git template
 RUN git config --global credential.helper store && \
     git config --global user.name "Claude" && \
@@ -33,4 +29,4 @@ COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
 ENTRYPOINT ["/entrypoint.sh"]
-CMD ["node", "/usr/local/lib/node_modules/@anthropic-ai/claude-code/cli.js"]
+CMD ["node", "/usr/local/lib/node_modules/@anthropic-ai/claude-code/cli.js", "--dangerously-skip-permissions"]
