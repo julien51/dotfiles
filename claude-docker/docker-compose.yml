@@ -9,7 +9,7 @@ services:
       - GITHUB_TOKEN=${GITHUB_TOKEN}
     volumes:
       - ./workspace:/workspace
-      - claude-compose-data:/root
+      - claude-compose-data:/home/claude
       - ./claude-config:/shared-config:ro
     working_dir: /workspace
     restart: unless-stopped

@@ -27,6 +27,11 @@ elif docker ps -a --format '{{.Names}}' | grep -q "^$SESSION_NAME$"; then
     exit $?
 fi
 
+# Sync fresh credentials from host before launching
+if [ -f "$HOME/.claude/.credentials.json" ]; then
+    cp "$HOME/.claude/.credentials.json" "$HOME/claude-docker/claude-config/.claude/.credentials.json" 2>/dev/null || true
+fi
+
 # Build image if it doesn't exist
 if ! docker images | grep -q "claude-docker-claude-code"; then
     echo "Building Claude image..."
@@ -42,7 +47,7 @@ docker run -d \
     -e ANTHROPIC_API_KEY="$ANTHROPIC_API_KEY" \
     -e GITHUB_TOKEN="$GITHUB_TOKEN" \
     -v "$HOME/claude-docker/workspace:/workspace" \
-    -v "claude-session-${SESSION_NAME}:/root" \
+    -v "${SESSION_NAME}:/home/claude" \
     -v "$HOME/claude-docker/claude-config:/shared-config:ro" \
     -w /workspace \
     -it \
