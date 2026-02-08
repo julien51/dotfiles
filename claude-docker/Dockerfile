@@ -16,7 +16,8 @@ RUN apt-get update && apt-get install -y \
 RUN npm install -g @anthropic-ai/claude-code
 
 # Configure git template
-RUN git config --global credential.helper store && \
+RUN mkdir -p /root-template && \
+    git config --global credential.helper store && \
     git config --global user.name "Claude" && \
     git config --global user.email "claude@orangepi.local" && \
     cp /root/.gitconfig /root-template/.gitconfig
