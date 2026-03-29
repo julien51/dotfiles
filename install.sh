@@ -53,16 +53,8 @@ clone_or_pull "${PRIVATE_BASE}/claude-docker.git" "$HOME/claude-docker"
 
 # Install Claude CLI if missing
 if ! command -v claude &> /dev/null; then
-    if command -v npm &> /dev/null; then
-        echo "Installing Claude CLI..."
-        npm install -g @anthropic-ai/claude-code
-    elif command -v node &> /dev/null; then
-        echo "Installing npm and Claude CLI..."
-        curl -qL https://www.npmjs.com/install.sh | sh
-        npm install -g @anthropic-ai/claude-code
-    else
-        echo "Warning: node/npm not found — install Node.js then run: npm install -g @anthropic-ai/claude-code"
-    fi
+    echo "Installing Claude CLI..."
+    curl -fsSL https://claude.ai/install.sh | sh
 fi
 
 # Install Claude plugins
