@@ -60,6 +60,9 @@ fi
 
 # Install Claude plugins
 if command -v claude &> /dev/null; then
+    # Register marketplaces first
+    claude plugin marketplace add obra/superpowers-marketplace 2>/dev/null || true
+    # Install plugins
     while IFS= read -r plugin; do
         [[ -z "$plugin" || "$plugin" == \#* ]] && continue
         echo "Installing Claude plugin: $plugin"
