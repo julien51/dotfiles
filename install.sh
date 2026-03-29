@@ -41,8 +41,15 @@ clone_or_pull() {
     fi
 }
 
-clone_or_pull "https://github.com/julien51/dotclaude.git" "$HOME/.claude"
-clone_or_pull "https://github.com/julien51/claude-docker.git" "$HOME/claude-docker"
+# Use token in URL if available (for private repos)
+if [ -n "$GITHUB_TOKEN" ]; then
+    PRIVATE_BASE="https://oauth2:${GITHUB_TOKEN}@github.com/julien51"
+else
+    PRIVATE_BASE="https://github.com/julien51"
+fi
+
+clone_or_pull "${PRIVATE_BASE}/dotclaude.git" "$HOME/.claude"
+clone_or_pull "${PRIVATE_BASE}/claude-docker.git" "$HOME/claude-docker"
 
 # Install Claude plugins
 if command -v claude &> /dev/null; then
