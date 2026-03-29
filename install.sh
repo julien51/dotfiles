@@ -83,6 +83,7 @@ if os.path.exists(path):
     with open(path) as f:
         data = json.load(f)
 data["theme"] = "dark"
+data["hasCompletedOnboarding"] = True
 with open(path, "w") as f:
     json.dump(data, f, indent=2)
 EOF
