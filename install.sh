@@ -58,7 +58,22 @@ if ! command -v claude &> /dev/null; then
     export PATH="$HOME/.local/bin:$PATH"
 fi
 
+# Install Claude plugins
+if command -v claude &> /dev/null; then
+    # Register marketplaces first
+    claude plugin marketplace add obra/superpowers-marketplace 2>/dev/null || true
+    # Install plugins
+    while IFS= read -r plugin; do
+        [[ -z "$plugin" || "$plugin" == \#* ]] && continue
+        echo "Installing Claude plugin: $plugin"
+        claude plugin install "$plugin" || echo "Warning: failed to install $plugin"
+    done < "$HOME/.claude/plugins.txt"
+else
+    echo "Skipping plugin installation (claude CLI not available)"
+fi
+
 # Set dark theme in ~/.claude.json (avoids first-launch theme prompt)
+# Must run after plugin commands so Claude doesn't reinitialize the file
 if command -v python3 &> /dev/null; then
     python3 - <<'EOF'
 import json, os
@@ -72,20 +87,6 @@ with open(path, "w") as f:
     json.dump(data, f, indent=2)
 EOF
     echo "Set dark theme in ~/.claude.json"
-fi
-
-# Install Claude plugins
-if command -v claude &> /dev/null; then
-    # Register marketplaces first
-    claude plugin marketplace add obra/superpowers-marketplace 2>/dev/null || true
-    # Install plugins
-    while IFS= read -r plugin; do
-        [[ -z "$plugin" || "$plugin" == \#* ]] && continue
-        echo "Installing Claude plugin: $plugin"
-        claude plugin install "$plugin" || echo "Warning: failed to install $plugin"
-    done < "$HOME/.claude/plugins.txt"
-else
-    echo "Skipping plugin installation (claude CLI not available)"
 fi
 
 echo "Done! You may need to restart your shell."
