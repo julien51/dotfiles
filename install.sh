@@ -51,6 +51,14 @@ fi
 clone_or_pull "${PRIVATE_BASE}/dotclaude.git" "$HOME/.claude"
 clone_or_pull "${PRIVATE_BASE}/claude-docker.git" "$HOME/claude-docker"
 
+# Persist GITHUB_TOKEN for Stop hook (commits learnings to dotclaude)
+if [ -n "$GITHUB_TOKEN" ]; then
+    if ! grep -q "GITHUB_TOKEN" "$HOME/.bashrc.local" 2>/dev/null; then
+        echo "export GITHUB_TOKEN=$GITHUB_TOKEN" >> "$HOME/.bashrc.local"
+        echo "Saved GITHUB_TOKEN to ~/.bashrc.local"
+    fi
+fi
+
 # Install Claude CLI if missing
 if ! command -v claude &> /dev/null; then
     echo "Installing Claude CLI..."
