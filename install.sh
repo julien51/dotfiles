@@ -34,6 +34,7 @@ clone_or_pull() {
     local dest="$2"
     if [ -d "$dest/.git" ]; then
         echo "Updating $dest..."
+        git -C "$dest" remote set-url origin "$repo"
         git -C "$dest" pull --ff-only
     else
         echo "Cloning $repo -> $dest..."
