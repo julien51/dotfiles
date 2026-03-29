@@ -58,6 +58,22 @@ if ! command -v claude &> /dev/null; then
     export PATH="$HOME/.local/bin:$PATH"
 fi
 
+# Set dark theme in ~/.claude.json (avoids first-launch theme prompt)
+if command -v python3 &> /dev/null; then
+    python3 - <<'EOF'
+import json, os
+path = os.path.expanduser("~/.claude.json")
+data = {}
+if os.path.exists(path):
+    with open(path) as f:
+        data = json.load(f)
+data["theme"] = "dark"
+with open(path, "w") as f:
+    json.dump(data, f, indent=2)
+EOF
+    echo "Set dark theme in ~/.claude.json"
+fi
+
 # Install Claude plugins
 if command -v claude &> /dev/null; then
     # Register marketplaces first
