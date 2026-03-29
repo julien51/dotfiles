@@ -54,7 +54,7 @@ clone_or_pull "${PRIVATE_BASE}/claude-docker.git" "$HOME/claude-docker"
 # Install Claude CLI if missing
 if ! command -v claude &> /dev/null; then
     echo "Installing Claude CLI..."
-    curl -fsSL https://claude.ai/install.sh | sh
+    curl -fsSL https://claude.ai/install.sh | bash
 fi
 
 # Install Claude plugins
