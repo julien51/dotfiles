@@ -50,7 +50,7 @@ else
 fi
 
 clone_or_pull "${PRIVATE_BASE}/dotclaude.git" "$HOME/.claude"
-clone_or_pull "${PRIVATE_BASE}/claude-docker.git" "$HOME/claude-docker"
+clone_or_pull "${PRIVATE_BASE}/claude-code-docker.git" "$HOME/claude-code-docker"
 
 # Persist GITHUB_TOKEN for Stop hook (commits learnings to dotclaude)
 if [ -n "$GITHUB_TOKEN" ]; then
